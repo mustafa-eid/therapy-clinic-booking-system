@@ -5,7 +5,7 @@
 <meta content="Themesbrand" name="author">
 
 <!-- App favicon -->
-<link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}">
+<link rel="shortcut icon" type="image/x-icon" href="https://clinic.kenooz.co/website-assets/icon.png">
 
 <!-- Fonts css load -->
 <link rel="preconnect" href="https://fonts.googleapis.com">

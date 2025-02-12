@@ -6,7 +6,6 @@
                     <form wire:submit.prevent="submitForm" class="p-4 shadow-sm rounded bg-light">
                         @csrf
                         <h3 class="text-center mb-4" style="color: #yourColorCode;">Patient Therapy Questionnaire</h3>
-                        <!-- Progress Bar -->
                         <div class="progress mb-4">
                             <div class="progress-bar" role="progressbar" style="width: {{ $step * 20 }}%"
                                 aria-valuenow="{{ $step * 20 }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -61,7 +60,6 @@
                                 @enderror
                             </div>
                         @endif
-                        <!-- Navigation Buttons -->
                         <div class="form-group d-flex justify-content-between align-items-center mt-4">
                             @if ($step == 1)
                                 <a href="{{ route('patient.dashboard') }}" class="btn btn-warning btn-sm">Skip</a>

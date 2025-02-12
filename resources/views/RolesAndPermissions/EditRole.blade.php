@@ -21,7 +21,7 @@
                             <h1>{{ __('Create New Role') }}</h1>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ URL('update-role') }}">
+                            <form method="POST" action="{{ URL('cPanel/update-role') }}">
                                 @csrf
                                 <input type="text" id="id" name="id" value="{{ $role->id }}" readonly
                                     required hidden />

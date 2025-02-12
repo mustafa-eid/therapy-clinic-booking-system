@@ -127,9 +127,10 @@
                                                                 </a>
                                                             </li>
                                                         @endcan
-                                                        @can('Show Roles And Permmonsins')
+                                                        @can('Show Roles And Permissions')
                                                             <li class="nav-item">
-                                                                <a class="nav-link" href="{{ URL('show-roles') }}">
+                                                                <a class="nav-link"
+                                                                    href="{{ URL('cPanel/show-roles') }}">
                                                                     <i class="ph-shield-check"></i>
                                                                     <span>{{ __('Roles And Permissions') }}</span>
                                                                 </a>

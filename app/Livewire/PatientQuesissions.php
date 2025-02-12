@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Patient;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,7 +55,7 @@ class PatientQuesissions extends Component
         $this->validate();
 
         $patient = Auth::guard('patient')->user();
-        if ($patient instanceof \App\Models\Patient) {
+        if ($patient instanceof Patient) {
             $patient->questions = $this->questions;
             $patient->save();
         } else {

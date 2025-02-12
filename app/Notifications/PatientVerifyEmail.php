@@ -30,7 +30,7 @@ class PatientVerifyEmail extends VerifyEmail
     protected function verificationUrl($notifiable)
     {
         if (!$notifiable instanceof \App\Models\Patient) {
-            return url('/'); 
+            return url('/');
         }
 
         return url(route('patient.verification.verify', [

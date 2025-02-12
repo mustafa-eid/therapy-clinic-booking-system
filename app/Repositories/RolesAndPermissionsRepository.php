@@ -47,9 +47,14 @@ class RolesAndPermissionsRepository implements RolesAndPermissionsRepositoryInte
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission]);
         }
+
+        // Assign all permissions to Super Admin
+        $superAdminRole = Role::firstOrCreate(['name' => 'Super Admin']);
+        $superAdminRole->syncPermissions($permissions);
     }
+
 
     public function getAllRoles()
     {
@@ -77,7 +82,7 @@ class RolesAndPermissionsRepository implements RolesAndPermissionsRepositoryInte
             $user->assignRole($role->name);
         }
 
-        return redirect('show-roles');
+        return redirect('cPanel/show-roles');
     }
 
     public function getRoleForEditing($id)
@@ -106,12 +111,12 @@ class RolesAndPermissionsRepository implements RolesAndPermissionsRepositoryInte
             $user->assignRole($role->name);
         }
 
-        return redirect('show-roles');
+        return redirect('cPanel/show-roles');
     }
 
     public function deleteRole($id)
     {
         Role::where('id', $id)->delete();
-        return redirect('show-roles');
+        return redirect('cPanel/show-roles');
     }
 }

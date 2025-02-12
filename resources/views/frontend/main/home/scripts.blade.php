@@ -1,115 +1,67 @@
-<!-- jQuery -->
-<script src="{{ asset('patient-assets/js/jquery-3.7.1.min.js') }}" type="text/javascript"></script>
+<div class="pbmit-progress-wrap">
+    <svg class="pbmit-progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+            style="transition: stroke-dashoffset 10ms linear; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 19.2859;">
+        </path>
+    </svg>
+    <i class="fa-solid fa-arrow-up"
+        style="font-size: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
+</div>
 
-<!-- Bootstrap Core JS -->
-<script src="{{ asset('patient-assets/js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
-
-<!-- Daterangepicker JS -->
-<script src="{{ asset('patient-assets/js/moment.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('patient-assets/plugins/daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
-
-<!-- Custom JS -->
-<script src="{{ asset('patient-assets/js/script.js') }}" type="text/javascript"></script>
-
-<!-- Cloudflare Rocket Loader -->
-<script src="{{ asset('patient-assets/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js') }}"
-    data-cf-settings="7b459e1560d0a626dea0d18f-|49" defer></script>
-
+<!-- JS -->
+<!-- jQuery JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/bootstrap.min.js"></script>
+<!-- jquery Waypoints JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/jquery.waypoints.min.js"></script>
+<!-- jquery Appear JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/jquery.appear.js"></script>
+<!-- Numinate JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/numinate.min.js"></script>
+<!-- Slick JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/swiper.min.js"></script>
+<!-- Magnific JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/jquery.magnific-popup.min.js"></script>
+<!-- Circle Progress JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/circle-progress.js"></script>
+<!-- countdown JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/jquery.countdown.min.js"></script>
+<!-- AOS -->
+<script src="https://clinic.kenooz.co/website-assets/js/aos.js"></script>
+<!-- GSAP -->
+<script src="https://clinic.kenooz.co/website-assets/js/gsap.js"></script>
+<!-- Scroll Trigger -->
+<script src="https://clinic.kenooz.co/website-assets/js/ScrollTrigger.js"></script>
+<!-- Split Text -->
+<script src="https://clinic.kenooz.co/website-assets/js/SplitText.js"></script>
+<!-- masonry JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/masonry.min.js"></script>
+<!-- Isotope JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/isotope.pkgd.min.js"></script>
+<!-- Magnetic -->
+<script src="https://clinic.kenooz.co/website-assets/js/magnetic.js"></script>
+<!-- GSAP Animation -->
+<script src="https://clinic.kenooz.co/website-assets/js/gsap-animation.js"></script>
+<!-- Scripts JS -->
+<script src="https://clinic.kenooz.co/website-assets/js/scripts.js"></script>
 
 <script>
-    // Set the current month dynamically
-    document.addEventListener('DOMContentLoaded', function() {
-        const currentMonth = new Date().toLocaleString('default', {
-            month: 'long',
-            year: 'numeric'
-        });
-        document.getElementById('currentMonth').textContent = currentMonth;
-
-        const today = new Date().toISOString().split('T')[0]; // Today's date in 'YYYY-MM-DD' format
-
-        // Filter out past days
-        document.querySelectorAll('.day-card').forEach(function(dayCard) {
-            const dayDate = dayCard.getAttribute('data-date');
-            if (dayDate < today) {
-                dayCard.style.display = 'none'; // Hide past days
-            } else if (dayDate === today) {
-                dayCard.classList.add('selected'); // Highlight today
-                selectDay(dayCard); // Display today's available timeslot
-            }
-        });
-    });
-
-    function selectDay(element) {
-        // Deselect all day cards
-        document.querySelectorAll('.day-card').forEach(function(dayCard) {
-            dayCard.classList.remove('selected');
-        });
-
-        // Select the clicked day
-        element.classList.add('selected');
-        var selectedDate = element.getAttribute('data-date');
-
-        if (selectedDate) {
-            var dateObj = new Date(selectedDate);
-            var options = {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            };
-            var formattedDate = dateObj.toLocaleDateString('en-GB', options);
-            var dayName = dateObj.toLocaleString('en-GB', {
-                weekday: 'long'
-            });
-
-            document.getElementById('selectedDay').innerHTML = ` 
-                    <div class="col-12 col-sm-4 col-md-6">
-                        <h4 class="mb-1">${formattedDate}</h4>
-                        <p class="text-muted">${dayName}</p>
-                    </div>
-                `;
-        }
-
-        // Hide all time slot groups
-        document.querySelectorAll('.time-slot-group').forEach(function(slotGroup) {
-            slotGroup.style.display = 'none';
-        });
-
-        // Show the time slot group for the selected day
-        var selectedSlotGroup = document.querySelector('.time-slots-' + selectedDate);
-        if (selectedSlotGroup) {
-            selectedSlotGroup.style.display = 'block';
-        } else {
-            alert("No time slots available for the selected day.");
-        }
-    }
-
-    function selectTimeSlot(element, slotId, slotTime) {
-        document.querySelectorAll('.timing').forEach(function(slot) {
-            slot.classList.remove('selected');
-        });
-        element.classList.add('selected');
-
-        document.getElementById('proceedToPayBtn').innerText = 'Proceed to Pay';
-        document.getElementById('selectedSlotId').value = slotId;
-        document.getElementById('selectedSlotTime').value = slotTime;
-    }
-
-    function submitBooking() {
-        var slotId = document.getElementById('selectedSlotId').value;
-        var selectedDate = document.getElementById('daySelectorContainer').querySelector('.selected')?.getAttribute(
-            'data-date');
-
-        if (!selectedDate) {
-            alert('Please select a day.');
-        } else if (!slotId) {
-            alert('Please select a time slot.');
-        } else {
-            var form = document.createElement('form');
-            form.method = 'POST';
-            form.action = "{{ route('patient.book-tim-slot', '') }}/" + slotId;
-            form.innerHTML = '@csrf';
-            document.body.appendChild(form);
-            form.submit();
-        }
-    }
+    'undefined' === typeof _trfq || (window._trfq = []);
+    'undefined' === typeof _trfd && (window._trfd = []), _trfd.push({
+        'tccl.baseHost': 'secureserver.net'
+    }, {
+        'ap': 'cpsh-oh'
+    }, {
+        'server': 'sxb1plzcpnl489831'
+    }, {
+        'dcenter': 'sxb1'
+    }, {
+        'cp_id': '9919290'
+    }, {
+        'cp_cl': '8'
+    }) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.
 </script>
+<script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script>

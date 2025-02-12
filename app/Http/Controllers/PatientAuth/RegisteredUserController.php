@@ -29,10 +29,9 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // Validation rules
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:patients,email'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:patients,email', 'regex:/^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$/'],
             'phone' => ['required', 'string', 'max:15', 'regex:/^(01)[0-2,5][0-9]{8}$/'],
             'gender' => ['required', 'in:Male,Female'],
             'age' => ['required', 'integer', 'min:1'],
@@ -40,7 +39,6 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // Creating the patient record
         $patient = Patient::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -50,14 +48,8 @@ class RegisteredUserController extends Controller
             'birthday' => $request->birthday,
             'password' => Hash::make($request->password),
         ]);
-
-        // Trigger the Registered event (this sends the email verification)
         $patient->sendEmailVerificationNotification();
-
-        // Login the patient
         Auth::guard('patient')->login($patient);
-
-        // Redirect to the dashboard after successful registration
         return redirect()->route('patient.verification.notice');
     }
 }

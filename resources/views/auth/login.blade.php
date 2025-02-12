@@ -1,215 +1,211 @@
-{{-- <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout> --}}
-
 <!doctype html>
-<html lang="en" data-layout="vertical" data-sidebar="dark" data-sidebar-size="lg" data-preloader="disable"
-    data-theme="default" data-topbar="light" data-bs-theme="light">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Sign In | Habiby Clinic</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-    <meta content="Minimal Admin & Dashboard Template" name="description">
-    <meta content="Themesbrand" name="author">
-    <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}">
+    <meta charset="utf-8" />
+    <title> Habiby Clinic </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habiby Clinic</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://clinic.kenooz.co/icon.png">
+    <link rel="icon" href="https://clinic.kenooz.co/favicon.ico" type="image/x-icon">
+    <!-- Perfect Scrollbar CSS -->
+    <link href="https://clinic.kenooz.co/dist/css/perfect-scrollbar.css" rel="stylesheet" type="text/css">
+    <!-- Dragula CSS -->
+    <link href="https://clinic.kenooz.co/vendors/dragula/dist/dragula.min.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap Dropify CSS -->
+    <link href="https://clinic.kenooz.co/vendors/dropify/dist/css/dropify.min.css" rel="stylesheet" type="text/css">
+    <!-- Daterangepicker CSS -->
+    <link href="https://clinic.kenooz.co/vendors/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap Colorpicker -->
+    <link href="https://clinic.kenooz.co/vendors/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css"
+        rel="stylesheet" type="text/css">
+    <!-- Bootstrap Dropzone CSS -->
+    <link href="https://clinic.kenooz.co/vendors/dropzone/dist/dropzone.min.css" rel="stylesheet" type="text/css">
+    <!-- select2 CSS -->
+    <link href="https://clinic.kenooz.co/vendors/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <!-- CSS -->
+    <link href="https://clinic.kenooz.co/dist/css/style.css" rel="stylesheet" type="text/css">
 
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css">
-    <script src="assets/js/layout.js"></script>
+    <link href="https://clinic.kenooz.co/vendors/@sweetalert2/theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet"
+        type="text/css">
 
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #cb111100 0%, #2575fc 100%);
-            margin: 0;
-            padding: 0;
-        }
-
-        .auth-page-wrapper {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            padding: 40px 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .logo-col {
-            flex: 0 0 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .form-col {
-            flex: 0 0 50%;
-        }
-
-        .card {
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-body {
-            padding: 25px;
-        }
-
-        .form-control {
-            border-radius: 12px;
-            border: 1px solid #ddd;
-        }
-
-        .btn-primary {
-            background-color: #6a11cb;
-            border-color: #6a11cb;
-            border-radius: 12px;
-            padding: 10px;
-            width: 100%;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .invalid-feedback {
-            display: block;
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
+        integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+        integrity="sha512-XcIsjKMcuVe0Ucj/xgIXQnytNwBttJbNjltBV18IOnru2lDPe9KRRyvCXw6Y5H415vbBLRm8+q6fmLUU7DfO6Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
 
-    <section class="auth-page-wrapper py-5">
-        <div class="container">
-            <div class="row w-100">
-                <!-- Left side with Logo -->
-                <div class="logo-col">
-                    <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" height="170">
-                </div>
-
-                <!-- Right side with Login Form -->
-                <div class="form-col">
-                    <div class="card mb-0 border-0 shadow-none">
-                        <div class="card-body p-sm-5 m-lg-4">
-                            <div class="text-center mt-3">
-                                <h5 class="fs-3xl">Welcome to Habiby Clinic</h5>
-                                <p class="text-muted">Sign in to continue to your dashboard.</p>
-                            </div>
-
-                            @if (session('status'))
-                                <div class="alert alert-success">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-
-                            <div class="p-2 mt-4">
-                                <form method="POST" action="{{ route('login') }}">
+    <div class="hk-wrapper hk-pg-auth" data-footer="simple">
+        <div class="hk-pg-wrapper py-0">
+            <div class="hk-pg-body py-0">
+                <div class="container-fluid">
+                    <div class="row auth-split">
+                        <div class="col-xl-6 col-lg-6 col-md-12 position-relative mx-auto bg-primary-light-5">
+                            <div class="auth-content flex-column pt-8 pb-md-8 pb-13">
+                                <form action="{{ route('login') }}" method="POST">
                                     @csrf
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control @error('email') is-invalid @enderror" 
-                                            name="email" id="email" placeholder="Enter email" value="{{ old('email') }}" required>
-                                        @error('email')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="password-input" class="form-label">Password <span
-                                                class="text-danger">*</span></label>
-                                        <div class="position-relative">
-                                            <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                                                placeholder="Enter password" id="password-input" name="password" required>
-                                            @error('password')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
+                                    <div class="row">
+                                        <div class="col-xl-9 col-sm-10 mx-auto">
+                                            <div class="card card-flush rounded-8 shadow-xl mb-0 p-sm-7 p-2">
+                                                <div class="card-body">
+                                                    <div class="text-center mb-7">
+                                                        <a class="navbar-brand me-0" href="{{ route('home') }}">
+                                                            <img class="brand-img d-inline-block img-fluid"
+                                                                src="https://clinic.kenooz.co/logo.png" alt="brand">
+                                                        </a>
+                                                    </div>
+                                                    <div class="text-center mb-4">
+                                                        <h4>Sign in to continue to your dashboard</h4>
+                                                    </div>
+                                                    <div class="row gx-3">
+                                                        <div class="form-group col-lg-12">
+                                                            <div class="form-label-group">
+                                                                <label>Email</label>
+                                                            </div>
+                                                            <input
+                                                                class="form-control @error('email') is-invalid @enderror"
+                                                                placeholder="Enter your email" type="text"
+                                                                name="email" value="{{ old('email') }}" required>
+                                                            @error('email')
+                                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="form-group col-lg-12">
+                                                            <div class="form-label-group">
+                                                                <label>Password</label>
+                                                            </div>
+                                                            <div class="input-group password-check">
+                                                                <span class="input-affix-wrapper affix-wth-text">
+                                                                    <input
+                                                                        class="form-control @error('password') is-invalid @enderror"
+                                                                        placeholder="Enter your password"
+                                                                        type="password" name="password" required
+                                                                        autocomplete="current-password">
+                                                                    <a href="#"
+                                                                        class="input-suffix text-primary text-uppercase fs-8 fw-medium">
+                                                                        <span>Show</span>
+                                                                        <span class="d-none">Hide</span>
+                                                                    </a>
+                                                                </span>
+                                                            </div>
+                                                            @error('password')
+                                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <div class="form-check form-check-sm">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="logged_in" checked="">
+                                                            <label class="form-check-label text-muted fs-7"
+                                                                for="logged_in">Keep me logged in</label>
+                                                        </div>
+                                                        <a href="{{ route('password.request') }}"
+                                                            class="text-primary fw-bold">Forgot Password?</a>
+                                                    </div>
+                                                    <button type="submit"
+                                                        class="btn btn-primary btn-uppercase btn-block">Login</button>
                                                 </div>
-                                            @enderror
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="auth-remember-check" name="remember">
-                                            <label class="form-check-label" for="auth-remember-check">Remember
-                                                me</label>
-                                        </div>
-
-                                        @if (Route::has('password.request'))
-                                            <a href="{{ route('password.request') }}">Forgot your password?</a>
-                                        @endif
-                                    </div>
-
-                                    <div class="mt-3">
-                                        <button class="btn btn-primary w-100" type="submit">Sign In</button>
                                     </div>
                                 </form>
                             </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end form-col -->
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </section>
+                        </div>
+                        <div
+                            class="col-xl-6 col-lg-6 col-md-5 col-sm-10 d-md-block d-none position-relative bg-primary-light-5">
+                            <div class="auth-content flex-column text-center py-8">
+                                <img src=https://clinic.kenooz.co/login.png class="img-fluid  mt-7" alt="login">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="https://clinic.kenooz.co/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JS -->
+    <script src="https://clinic.kenooz.co/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FeatherIcons JS -->
+    <script src="https://clinic.kenooz.co/dist/js/feather.min.js"></script>
+    <!-- Fancy Dropdown JS -->
+    <script src="https://clinic.kenooz.co/dist/js/dropdown-bootstrap-extended.js"></script>
+    <!-- Simplebar JS -->
+    <script src="https://clinic.kenooz.co/vendors/simplebar/dist/simplebar.min.js"></script>
+    <!-- Tinymce JS -->
+    <script src="https://clinic.kenooz.co/vendors/tinymce/tinymce.min.js"></script>
+    <!-- Dragula JS -->
+    <script src="https://clinic.kenooz.co/vendors/dragula/dist/dragula.min.js"></script>
+    <!-- PS Scroll JS -->
+    <script src="https://clinic.kenooz.co/dist/js/perfect-scrollbar.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/moment/min/moment.min.js"></script>
+    <script src="https://clinic.kenooz.co/dist/js/daterangepicker-data.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/dropzone/dist/dropzone.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/dropify/dist/js/dropify.min.js"></script>
+    <script src="https://clinic.kenooz.co/dist/js/dropify-data.js"></script>
+    <!-- Apex JS -->
+    <script src="https://clinic.kenooz.co/vendors/apexcharts/dist/apexcharts.min.js"></script>
+    <!-- Data Table JS -->
+    <script src="https://clinic.kenooz.co/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/jszip/dist/jszip.min.js"></script>
 
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/pages/password-addon.init.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/datatables.net-select/js/dataTables.select.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/datatables.net-fixedcolumns/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://clinic.kenooz.co/vendors/datatables.net-rowreorder/js/dataTables.rowReorder.min.js"></script>
+    <script src="https://clinic.kenooz.co/dist/js/dataTables-data.js"></script>
+    <!-- Select2 JS -->
+    <script src="https://clinic.kenooz.co/vendors/select2/dist/js/select2.full.min.js"></script>
+    <script src="https://clinic.kenooz.co/dist/js/select2-data.js"></script>
+    <!-- Init JS -->
+    <script src="https://clinic.kenooz.co/dist/js/kanban-board-data.js"></script>
+    <script src="https://clinic.kenooz.co/dist/js/init.js"></script>
+    <script src="https://clinic.kenooz.co/dist/js/chips-init.js"></script>
+
+    <script src="https://clinic.kenooz.co/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="https://clinic.kenooz.co/dist/js/sweetalert-data.js"></script>
+    <script>
+        document.addEventListener('focusin', function(e) {
+            if (e.target.closest('.select2-search__field') !== null) {
+                e.stopImmediatePropagation();
+            }
+        });
+    </script>
+    <script>
+        'undefined' === typeof _trfq || (window._trfq = []);
+        'undefined' === typeof _trfd && (window._trfd = []), _trfd.push({
+            'tccl.baseHost': 'secureserver.net'
+        }, {
+            'ap': 'cpsh-oh'
+        }, {
+            'server': 'sxb1plzcpnl489831'
+        }, {
+            'dcenter': 'sxb1'
+        }, {
+            'cp_id': '9919290'
+        }, {
+            'cp_cl': '8'
+        })
+    </script>
+    <script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script>
 
 </body>
 

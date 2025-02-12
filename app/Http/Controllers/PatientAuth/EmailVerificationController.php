@@ -18,7 +18,7 @@ class EmailVerificationController extends Controller
      */
     public function show()
     {
-        return view('auth.verify-email');
+        return view('auth.verify-email-patient');
     }
 
     /**
@@ -37,5 +37,25 @@ class EmailVerificationController extends Controller
         }
 
         return redirect()->route('patient.dashboard')->with('success', 'Your email has been successfully verified!');
+    }
+
+    /**
+     * Resend email verify to patient.
+     */
+    public function resend(Request $request): RedirectResponse
+    {
+        $user = Auth::guard('patient')->user();
+
+        if (!$user) {
+            return back()->with('error', 'No account found.');
+        }
+
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->route('patient.dashboard')->with('message', 'Your email is already verified.');
+        }
+
+        $user->sendEmailVerificationNotification();
+
+        return back()->with('status', 'verification-link-sent');
     }
 }

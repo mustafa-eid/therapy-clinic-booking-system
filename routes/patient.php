@@ -24,7 +24,7 @@ Route::prefix('patient')->name('patient.')->middleware('guest')->group(function 
 
     Route::get('email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
     Route::get('email/verify', [EmailVerificationController::class, 'show'])->name('verification.notice');
-    
+    Route::post('email/resend', [EmailVerificationController::class, 'resend'])->middleware('guest')->name('verification.send');
 });
 
 // Group routes for authenticated patients

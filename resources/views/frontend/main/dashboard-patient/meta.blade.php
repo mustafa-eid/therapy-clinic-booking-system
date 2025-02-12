@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="{{ asset('patient-assets/img/preview-banner.jpg') }}">
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="https://clinic.kenooz.co/website-assets/icon.png">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('patient-assets/css/bootstrap.min.css') }}">

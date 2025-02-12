@@ -17,7 +17,7 @@
             <div class="page-content">
                 <div class="container-fluid">
                     <div class="card-body">
-                        <a href="{{ URL('create-roles') }}"
+                        <a href="{{ URL('cPanel/create-roles') }}"
                             class="text-primary text-decoration-none d-inline-flex align-items-center gap-1"
                             style="white-space: nowrap; font-size: 14px; font-weight: 500;">
                             <i class="ph-plus"></i> {{ __('Create a new role') }}
@@ -33,11 +33,12 @@
                                     <td width="50%" class="text-center">
                                         <div class="d-flex justify-content-center align-items-center gap-1"
                                             style="width: 50%; margin: auto;">
-                                            <a href="{{ URL('edit-role') }}/{{ $role->id }}"
+                                            <a href="{{ URL('cPanel/edit-role') }}/{{ $role->id }}"
                                                 class="btn btn-subtle-secondary btn-icon btn-sm">
                                                 <i class="ph-pencil"></i>
                                             </a>
-                                            <form action="{{ URL('delete-role') }}/{{ $role->id }}" method="POST"
+                                            <form action="{{ URL('cPanel/delete-role') }}/{{ $role->id }}"
+                                                method="POST"
                                                 onsubmit="return confirm('Are you sure you want to delete this role?');">
                                                 @csrf
                                                 @method('DELETE')

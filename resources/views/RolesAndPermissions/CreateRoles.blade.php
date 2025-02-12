@@ -21,7 +21,7 @@
                             <h1>{{ __('Create New Role') }}</h1>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ URL('add-role') }}">
+                            <form method="POST" action="{{ URL('cPanel/add-role') }}">
                                 @csrf
                                 <label for="name">{{ __('Role Name') }}</label>
                                 <input type="text" required name="name" class="form-control" />
@@ -53,7 +53,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-
 
                                     <div class="col-md-6">
                                         <h1>{{ __('Users') }}</h1>
