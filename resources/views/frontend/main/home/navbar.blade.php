@@ -46,7 +46,7 @@
                     <div class="pbmit-right-box d-flex align-items-center">
                         <div class="pbmit-button-box-second">
                             <a class="pbmit-btn pbmit-btn-hover-global d-flex align-items-center"
-                                href="https://clinic.kenooz.co/choose-clinic">
+                                href="{{ route('patient.book-session') }}">
                                 <i class="fas fa-calendar-check me-2"></i>
                                 <span class="pbmit-button-text">Make An Appointment</span>
                             </a>
@@ -115,7 +115,7 @@
                                             <div class="pbmit-button">
                                                 <div class="pbmit-btn-box">
                                                     <a class="pbmit-btn me-3 transform-right transform-delay-4 d-flex align-items-center text-decoration-none"
-                                                        href="https://clinic.kenooz.co/choose-clinic">
+                                                        href="{{ route('patient.book-session') }}">
                                                         <i class="fas fa-calendar-check me-2 fs-6"></i>
                                                         <span class="pbmit-button-text">Book Appointment</span>
                                                     </a>

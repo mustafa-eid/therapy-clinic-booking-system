@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyFatoorahController;
 use App\Http\Controllers\PatientAuth\RegisteredUserController;
 use App\Http\Controllers\PatientControllers\BookingsController;
+use App\Http\Controllers\DoctorControllers\BookSessionController;
 use App\Http\Controllers\PatientAuth\EmailVerificationController;
 use App\Http\Controllers\PatientAuth\AuthenticatedSessionController;
 use App\Http\Controllers\PatientControllers\MedicalRecordsController;
@@ -25,7 +26,10 @@ Route::prefix('patient')->name('patient.')->middleware('guest')->group(function 
     Route::get('email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
     Route::get('email/verify', [EmailVerificationController::class, 'show'])->name('verification.notice');
     Route::post('email/resend', [EmailVerificationController::class, 'resend'])->middleware('guest')->name('verification.send');
+
+    Route::get('/book-session', [BookSessionController::class, 'index'])->name('book-session');
 });
+
 
 // Group routes for authenticated patients
 Route::prefix('patient')->name('patient.')->middleware(['patient-auth'])->group(function () {

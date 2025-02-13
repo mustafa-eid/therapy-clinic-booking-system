@@ -174,7 +174,7 @@
                         </div>
                         <!-- Updated Button Icon -->
                         <div class="pbmit-ihbox-btn">
-                            <a href="https://clinic.kenooz.co/choose-clinic">
+                            <a href="{{ route('patient.book-session') }}">
                                 <span class="pbmit-button-text">Make Appointment</span>
                                 <span class="pbmit-button-content-wrapper">
                                     <span class="pbmit-align-icon-right">

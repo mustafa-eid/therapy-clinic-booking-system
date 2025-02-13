@@ -11,18 +11,14 @@ use App\Http\Controllers\DoctorControllers\PaymentController;
 use App\Http\Controllers\DoctorControllers\RequestController;
 use App\Http\Controllers\DoctorControllers\DashboardController;
 use App\Http\Controllers\DoctorControllers\RescheduleController;
+use App\Http\Controllers\DoctorControllers\BookSessionController;
 use App\Http\Controllers\DoctorControllers\MedicationsController;
 use App\Http\Controllers\DoctorControllers\AvailableTimingsController;
 use App\Http\Controllers\DoctorControllers\PatientMedicationsController;
 use App\Http\Controllers\DoctorControllers\RolesAndPermissionsController;
 
 Route::get('/', function () {
-    $AvailableTimings = TimeSlot::all();
-    $dates = [];
-    for ($i = 0; $i < 7; $i++) {
-        $dates[] = Carbon::now()->addDays($i)->toDateString();
-    }
-    return view('frontend.home', compact('AvailableTimings', 'dates'));
+    return view('frontend.home');
 })->name('home');
 
 Route::get('/cPanel',  [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
@@ -85,7 +81,6 @@ Route::prefix('cPanel')->middleware('auth:web')->group(function () {
     Route::get('/edit-role/{id}', [RolesAndPermissionsController::class, 'editRole'])->middleware('permission:EditRole Roles And Permissions');
     Route::post('/update-role', [RolesAndPermissionsController::class, 'updateRole'])->middleware('permission:UpdateRole Roles And Permissions');
     Route::delete('/delete-role/{id}', [RolesAndPermissionsController::class, 'delete'])->middleware('permission:Delete Roles And Permissions');
-
 });
 
 require __DIR__ . '/auth.php';
