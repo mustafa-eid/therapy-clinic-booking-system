@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyFatoorahController;
 use App\Http\Controllers\PatientAuth\RegisteredUserController;
 use App\Http\Controllers\PatientControllers\BookingsController;
-use App\Http\Controllers\DoctorControllers\BookSessionController;
+use App\Http\Controllers\PatientControllers\BookSessionController;
 use App\Http\Controllers\PatientAuth\EmailVerificationController;
 use App\Http\Controllers\PatientAuth\AuthenticatedSessionController;
 use App\Http\Controllers\PatientControllers\MedicalRecordsController;

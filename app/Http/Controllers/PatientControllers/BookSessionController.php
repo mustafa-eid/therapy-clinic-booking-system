@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\DoctorControllers;
+namespace App\Http\Controllers\PatientControllers;
 
 use Carbon\Carbon;
 use App\Models\TimeSlot;
